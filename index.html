@@ -1,1 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Enlisted Field Manual</title>
+
+    <meta name="description" content="The unofficial player's guide to Enlisted. Learn mechanics, tactics, squads, maps, progression and more.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #111412;
+            color: #e8ebe7;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #171b18;
+            border-bottom: 1px solid #303731;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-size: 1.15rem;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #879b75;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #c7ccc6;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #a7bc91;
+        }
+
+        .search-button {
+            border: 1px solid #485047;
+            padding: 8px 13px;
+            border-radius: 6px;
+            background: #202520;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 24px;
+            background:
+                linear-gradient(rgba(12, 15, 13, 0.78), rgba(12, 15, 13, 0.92)),
+                radial-gradient(circle at center, #3b4639 0%, #111412 70%);
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .eyebrow {
+            color: #93a985;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.95;
+            letter-spacing: -2px;
+            margin-bottom: 25px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #c5cac4;
+            font-size: 1.15rem;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            padding: 13px 22px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .button-primary {
+            background: #7d926c;
+            color: #111412;
+        }
+
+        .button-primary:hover {
+            background: #93a985;
+        }
+
+        .button-secondary {
+            border: 1px solid #596257;
+            color: #e4e8e2;
+        }
+
+        .button-secondary:hover {
+            background: #202520;
+        }
+
+        /* =========================
+           GENERAL SECTIONS
+        ========================= */
+
+        .section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 80px 24px;
+        }
+
+        .section-header {
+            margin-bottom: 35px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            color: #9fa69e;
+        }
+
+        /* =========================
+           START HERE
+        ========================= */
+
+        .start-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .start-card {
+            background: #191d1a;
+            border: 1px solid #303731;
+            padding: 28px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .start-card:hover {
+            transform: translateY(-3px);
+            border-color: #687761;
+        }
+
+        .card-number {
+            color: #819475;
+            font-weight: bold;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .start-card h3 {
+            margin: 10px 0;
+            font-size: 1.25rem;
+        }
+
+        .start-card p {
+            color: #aeb5ad;
+        }
+
+        /* =========================
+           CATEGORIES
+        ========================= */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .category {
+            padding: 25px;
+            background: #171b18;
+            border: 1px solid #303731;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .category:hover {
+            background: #202520;
+            border-color: #6d7d66;
+        }
+
+        .category h3 {
+            margin-bottom: 7px;
+        }
+
+        .category p {
+            color: #9fa69e;
+            font-size: 0.92rem;
+        }
+
+        /* =========================
+           GUIDE CARDS
+        ========================= */
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .guide-card {
+            background: #191d1a;
+            border: 1px solid #303731;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .guide-image {
+            height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #293029;
+            color: #7f897e;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .guide-content {
+            padding: 22px;
+        }
+
+        .guide-category {
+            color: #8fa480;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .guide-content h3 {
+            margin: 7px 0;
+        }
+
+        .guide-content p {
+            color: #a7aea6;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            color: #9bb08b;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search-section {
+            background: #171b18;
+            border-top: 1px solid #2c332e;
+            border-bottom: 1px solid #2c332e;
+        }
+
+        .search-box {
+            max-width: 700px;
+            margin: 25px auto 0;
+            display: flex;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px;
+            background: #101310;
+            border: 1px solid #414941;
+            color: white;
+            border-radius: 6px 0 0 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-box button {
+            padding: 15px 20px;
+            background: #7d926c;
+            border: none;
+            font-weight: bold;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid #303731;
+            background: #0d0f0e;
+            padding: 50px 24px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer-text {
+            color: #858d85;
+            max-width: 700px;
+            font-size: 0.85rem;
+        }
+
+        .footer-links {
+            margin-top: 25px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #9ca49c;
+            font-size: 0.85rem;
+        }
+
+        .copyright {
+            margin-top: 25px;
+            color: #646b64;
+            font-size: 0.75rem;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            nav {
+                display: none;
+            }
+
+            .start-grid,
+            .category-grid,
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 560px;
+            }
+
+            .hero h1 {
+                font-size: 3.4rem;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="nav-container">
+
+        <a href="#" class="logo">
+            ENLISTED <span>FIELD MANUAL</span>
+        </a>
+
+        <nav>
+            <a href="#guides">Guides</a>
+            <a href="#mechanics">Mechanics</a>
+            <a href="#squads">Squads</a>
+            <a href="#maps">Maps</a>
+            <a href="#strategy">Strategy</a>
+            <a href="#progression">Progression</a>
+            <a href="#updates">Updates</a>
+            <a href="#search" class="search-button">Search</a>
+        </nav>
+
+    </div>
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                The Unofficial Enlisted Player's Guide
+            </div>
+
+            <h1>
+                ENLISTED<br>
+                FIELD MANUAL
+            </h1>
+
+            <p>
+                Learn the mechanics. Master your squads.
+                Improve your tactics and understand the battlefield.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#start" class="button button-primary">
+                    START HERE
+                </a>
+
+                <a href="#guides" class="button button-secondary">
+                    EXPLORE GUIDES
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- START HERE -->
+
+    <section class="section" id="start">
+
+        <div class="section-header">
+
+            <h2>Start Here</h2>
+
+            <p>
+                Whether you're new to Enlisted or looking to improve,
+                start with the section that matches your experience.
+            </p>
+
+        </div>
+
+        <div class="start-grid">
+
+            <div class="start-card">
+
+                <div class="card-number">01 — BEGINNER</div>
+
+                <h3>New to Enlisted?</h3>
+
+                <p>
+                    Learn the fundamentals of the game,
+                    progression, squads, objectives and combat.
+                </p>
+
+            </div>
+
+
+            <div class="start-card">
+
+                <div class="card-number">02 — IMPROVEMENT</div>
+
+                <h3>Want to Improve?</h3>
+
+                <p>
+                    Understand the mechanics and strategies
+                    that separate experienced players from beginners.
+                </p>
+
+            </div>
+
+
+            <div class="start-card">
+
+                <div class="card-number">03 — ADVANCED</div>
+
+                <h3>Already Experienced?</h3>
+
+                <p>
+                    Explore advanced mechanics, tactics,
+                    optimization and high-level strategies.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+
+    <section class="section" id="guides">
+
+        <div class="section-header">
+
+            <h2>Explore the Field Manual</h2>
+
+            <p>
+                Browse guides by category.
+            </p>
+
+        </div>
+
+        <div class="category-grid">
+
+            <a href="#" class="category">
+                <h3>Beginner</h3>
+                <p>Everything new players need to know.</p>
+            </a>
+
+            <a href="#" class="category" id="mechanics">
+                <h3>Mechanics</h3>
+                <p>Understand how Enlisted actually works.</p>
+            </a>
+
+            <a href="#" class="category" id="squads">
+                <h3>Squads</h3>
+                <p>Squad composition, soldiers and equipment.</p>
+            </a>
+
+            <a href="#" class="category" id="maps">
+                <h3>Maps</h3>
+                <p>Objectives, positions and tactical routes.</p>
+            </a>
+
+            <a href="#" class="category" id="strategy">
+                <h3>Strategy</h3>
+                <p>Practical tactics for winning battles.</p>
+            </a>
+
+            <a href="#" class="category" id="progression">
+                <h3>Progression</h3>
+                <p>Research, resources and progression advice.</p>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURED GUIDES -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <h2>Featured Guides</h2>
+
+            <p>
+                Detailed guides covering the most important parts of Enlisted.
+            </p>
+
+        </div>
+
+        <div class="guide-grid">
+
+            <article class="guide-card">
+
+                <div class="guide-image">
+                    SCREENSHOT PLACEHOLDER
+                </div>
+
+                <div class="guide-content">
+
+                    <div class="guide-category">
+                        Mechanics
+                    </div>
+
+                    <h3>How Rally Points Work</h3>
+
+                    <p>
+                        Learn how rally points work and how experienced
+                        players use them to control the battlefield.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        READ GUIDE →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="guide-card">
+
+                <div class="guide-image">
+                    SCREENSHOT PLACEHOLDER
+                </div>
+
+                <div class="guide-content">
+
+                    <div class="guide-category">
+                        Beginner
+                    </div>
+
+                    <h3>Understanding Battle Rating</h3>
+
+                    <p>
+                        Understand Battle Rating and how it affects
+                        matchmaking and progression.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        READ GUIDE →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="guide-card">
+
+                <div class="guide-image">
+                    SCREENSHOT PLACEHOLDER
+                </div>
+
+                <div class="guide-content">
+
+                    <div class="guide-category">
+                        Strategy
+                    </div>
+
+                    <h3>How to Attack Objectives</h3>
+
+                    <p>
+                        Learn how to approach objectives, create pressure
+                        and make better attacking decisions.
+                    </p>
+
+                    <a href="#" class="read-more">
+                        READ GUIDE →
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <section class="search-section" id="search">
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h2>Find a Guide</h2>
+
+                <p>
+                    Search the Field Manual for mechanics, tactics and guides.
+                </p>
+
+            </div>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    placeholder="Search Enlisted Field Manual..."
+                >
+
+                <button>
+                    SEARCH
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LATEST -->
+
+    <section class="section" id="updates">
+
+        <div class="section-header">
+
+            <h2>Latest Guides & Updates</h2>
+
+            <p>
+                New guides and explanations will appear here.
+            </p>
+
+        </div>
+
+        <div class="guide-grid">
+
+            <article class="guide-card">
+
+                <div class="guide-image">
+                    FUTURE GUIDE
+                </div>
+
+                <div class="guide-content">
+
+                    <div class="guide-category">
+                        Coming Soon
+                    </div>
+
+                    <h3>Engineer Guide</h3>
+
+                    <p>
+                        A complete guide to engineering and battlefield construction.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="guide-card">
+
+                <div class="guide-image">
+                    FUTURE GUIDE
+                </div>
+
+                <div class="guide-content">
+
+                    <div class="guide-category">
+                        Coming Soon
+                    </div>
+
+                    <h3>Tank Armor & Penetration</h3>
+
+                    <p>
+                        Learn how armor and penetration mechanics work.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="guide-card">
+
+                <div class="guide-image">
+                    FUTURE GUIDE
+                </div>
+
+                <div class="guide-content">
+
+                    <div class="guide-category">
+                        Coming Soon
+                    </div>
+
+                    <h3>Advanced Infantry Tactics</h3>
+
+                    <p>
+                        Practical strategies for experienced infantry players.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-content">
+
+        <div class="footer-title">
+            ENLISTED FIELD MANUAL
+        </div>
+
+        <p class="footer-text">
+            An independent, fan-made resource created to help Enlisted
+            players understand the game's mechanics, strategies and systems.
+        </p>
+
+        <div class="footer-links">
+
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy</a>
+            <a href="#">Disclaimer</a>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 Enlisted Field Manual. Independent fan project.
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
